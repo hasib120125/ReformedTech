@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>javascript fetch api call</title>
+		<style>
+			.d-none{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="getNewsHeadlines">Headlines</button>
+		<div id="newsList"></div>
+	<script>
+
+		document.getElementById('getNewsHeadlines').addEventListener('click',apiCall);
+		// function for view headlines
+		function apiCall(){
+			fetch('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8039a5d5370846eab687846784fa53d8')
+				.then((res)=> res.json())
+				.then((data) => {
+					let newsList = '<h2>Top Ten Headlines</h2>';
+						newsList +='<ol>';
+						for (i = 0; i <=9; i++) {
+							newsList += `<li> ${ data.articles[i].title }</li>`;
+						};
+						newsList +='</ol>';
+					document.getElementById('newsList').innerHTML = newsList;
+				})
+			};
+	</script>
+	</body>
+</html>
